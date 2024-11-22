@@ -7,6 +7,6 @@ The external APIs in developing the web application as suggested by the project 
 The link to the rapid APIs used for this project is given as; https://rapidapi.com/weatheronline/api/weather-forecast-14-days
 
 HOW TO USE
-1. After launching the app, users are prompted to input their country name and city name to check the weather of that particular plae inputed and click the check Weather button.
+1. After launching the app, users are prompted to input their country name and city name to check the weather of that particular place inputed and click the check Weather button.
 2. The button displays the current weather condition of the location inputed.
 NOTE: Inputting of postal code is for only places in Unites States of America.
