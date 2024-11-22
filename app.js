@@ -1,5 +1,27 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const url = 'https://open-weather13.p.rapidapi.com/city/landon/EN';
+document.getElementById('check-weather').addEventListener('click', async function () {
+    const countryValue = document.getElementById('country').value;
+    const cityValue = document.getElementById('city').value;
+    const postalCodeValue = document.getElementById('postalcode').value;
+
+    const resultBox = document.getElementById('result');
+    resultBox.innerHTML = 'Fetching weather data...'; // Display a loading message
+
+    try {
+        const responseData = await fetchWeatherData(countryValue, cityValue, postalCodeValue);
+
+        if (responseData) {
+            resultBox.innerHTML = formatWeatherData(responseData);
+        } else {
+            resultBox.innerHTML = '<p>No weather information available for this location.</p>';
+        }
+    } catch (error) {
+        resultBox.innerHTML = `<p style="color: red;">Error fetching weather data: ${error.message}</p>`;
+        console.error('Error:', error);
+    }
+});
+
+async function fetchWeatherData(country, city, postalCode) {
+    const url = `https://open-weather13.p.rapidapi.com/city/${city}/${country}`;
     const options = {
         method: 'GET',
         headers: {
@@ -8,38 +30,24 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    const fetchButton = document.createElement('button');
-    fetchButton.textContent = 'Fetch Weather Data';
-    document.body.appendChild(fetchButton);
+    const response = await fetch(url, options);
 
-    const resultDiv = document.createElement('div');
-    resultDiv.id = 'result';
-    document.body.appendChild(resultDiv);
+    if (!response.ok) {
+        throw new Error(`API request failed with status: ${response.status}`);
+    }
 
-    fetchButton.addEventListener('click', async function () {
-        try {
-            console.log('Fetching weather data...');
-            const response = await fetch(url, options);
+    return await response.json();
+}
 
-            console.log('Response status:', response.status);
-            if (!response.ok) {
-                throw new Error(`API Request Failed - Status: ${response.status}`);
-            }
-
-            const responseData = await response.json();
-            console.log('API Response:', responseData);
-
-            if (Object.keys(responseData).length > 0) {
-                resultDiv.innerHTML = `
-                    <h2>Weather Data</h2>
-                    <pre>${JSON.stringify(responseData, null, 2)}</pre>
-                `;
-            } else {
-                resultDiv.innerHTML = '<p>No data returned from API.</p>';
-            }
-        } catch (error) {
-            console.error('Error fetching weather data:', error);
-            resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
-        }
-    });
-});
+function formatWeatherData(weatherData) {
+    return `
+        <div>
+            <p><strong>City:</strong> ${weatherData.name || 'N/A'}</p>
+            <p><strong>Temperature:</strong> ${weatherData.temp || 'N/A'}°C</p>
+            <p><strong>Feels Lke:</strong> ${weatherData.feels_like || 'N/A'}°C</p>
+            <p><strong>Humidity:</strong> ${weatherData.humidity || 'N/A'}%</p>
+            <p><strong>Wind Speed:</strong> ${weatherData.wind_speed || 'N/A'} m/s</p>
+            <p><strong>Cloudiness:</strong> ${weatherData.cloud_pct || 'N/A'}%</p>
+        </div>
+    `;
+}

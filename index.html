@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>Ranky Weather</title>
-    <link rel="stylesheet" type="text/css" href="app.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Ranky Weather</h1>
+        <h1>Ranky Weather Checker</h1>
         <form id="weather-form">
             <label for="country">Country Name:</label>
             <input type="text" id="country" placeholder="Enter country name">
@@ -18,9 +18,11 @@
             <input type="text" id="postalcode" placeholder="Enter postal code"><br>
             
             <button type="button" id="check-weather">Check Weather</button>
-            <div id="result" class="result"></div>
         </form>
+        
+        <!-- Box to display the weather data -->
+        <div id="result" class="result-box"></div>
     </div>
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
