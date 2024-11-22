@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <h1>Weather Forecast</h1>
+        <form id="locationForm">
+            <label for="latitude">Latitude:</label>
+            <input type="text" id="latitude" placeholder="Enter Latitude (e.g., 51.5)" required>
+            <label for="longitude">Longitude:</label>
+            <input type="text" id="longitude" placeholder="Enter Longitude (e.g., -0.6)" required>
+            <button type="submit">Get Forecast</button>
+        </form>
+        <div id="forecastResults"></div>
+        <div id="errorMessage" class="error"></div>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+</html>
