@@ -1,6 +1,6 @@
 WEATHER APP
 A straightforward weather app that enables users to view current weather conditions for any specified location. The app retrieves live weather data from a public API and presents the information through an easy-to-navigate and visually appealing interface.
-Technologies Used
+Technologies Used:
 Html, Css,Javascript
 To run this app you will need Google chrome or Mozilla fire fox
 Deployment: Nginx(web server software)
